@@ -9,7 +9,7 @@ require 'json'
 require 'trollop'
 
 trap('SIGINT') do
-  puts 'Syncing cancelled!'
+  puts 'Cancelled!'
   exit!
 end
 
@@ -18,7 +18,7 @@ source_directory = File.expand_path(File.join('~/', '.config', 'parker'))
 options = Trollop.options do
   version "parker v#{Parker::VERSION}"
   banner <<-EOS
-A ridiculous tool for syncing game screenshots.
+A ridiculous tool for organising game screenshots.
 
 Usage:
 parker
