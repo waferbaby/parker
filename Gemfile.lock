@@ -1,0 +1,22 @@
+PATH
+  remote: .
+  specs:
+    parker (0.0.1)
+      trollop (~> 2.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    trollop (2.1.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  parker!
+
+RUBY VERSION
+   ruby 2.4.2p198
+
+BUNDLED WITH
+   1.15.4

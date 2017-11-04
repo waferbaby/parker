@@ -1,0 +1,67 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift(File.join(__dir__, '..', 'lib'))
+
+require 'parker'
+require 'parker/version'
+require 'json'
+require 'trollop'
+
+trap('SIGINT') do
+  puts 'Syncing cancelled!'
+  exit!
+end
+
+source_directory = File.expand_path(File.join('~/', '.config', 'parker'))
+
+options = Trollop.options do
+  version "parker v#{Parker::VERSION}"
+  banner <<-EOS
+A ridiculous tool for syncing game screenshots.
+
+Usage:
+parker
+Options:
+EOS
+  opt :config, 'Config file path', type: :string, default: File.join(source_directory, 'config.json')
+  opt :destination, 'Output directory for screenshots', type: :string, default: Dir.pwd
+end
+
+unless Dir.exist?(source_directory)
+  FileUtils.mkdir_p(source_directory)
+  puts "Created config directory: #{source_directory}"
+  exit
+end
+
+platforms = []
+
+Dir.glob(File.join(source_directory, '*.json')).each do |path|
+  platform_name = File.basename(path, File.extname(path)).capitalize
+
+  if (platform_klass = Object.const_get("Parker::Platform::#{platform_name}"))
+    platform_data = JSON.parse(File.read(path))
+
+    platforms << platform_klass.new(
+      platform_data['name'] || platform_name,
+      platform_data['source_path'],
+      platform_data['games'] || {}
+    )
+  end
+end
+
+output_path = File.expand_path(options[:destination])
+FileUtils.mkdir_p(output_path) unless Dir.exist?(output_path)
+
+puts "Copying screenshots to #{output_path}..."
+
+platforms.each do |platform|
+  platform.games.each_value do |game|
+    if game.screenshots.length > 0
+      puts "- Scanning #{game.name} (#{platform.name})"
+      game.copy_screenshots(File.join(output_path, platform.name))
+    end
+  end
+end
+
+puts "Done!"
