@@ -11,8 +11,8 @@ Gem::Specification.new do |s|
   s.authors     = ['Daniel Bogan']
   s.email       = ['d+parker@waferbaby.com']
   s.homepage    = 'http://github.com/waferbaby/parker'
-  s.summary     = 'A ridiculous tool for syncing game screenshots'
-  s.description = 'A ridiculous tool for syncing game screenshots.'
+  s.summary     = 'A tool for organising game screenshots'
+  s.description = 'A ridiculous tool for organising game screenshots.'
   s.license     = 'MIT'
 
   s.executables << 'parker'
