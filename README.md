@@ -18,11 +18,11 @@ It's a very simple command-line tool, requiring only a path for your screenshots
 
 `parker path/to/screenshots/`
 
-When the command is run, it will look for JSON configuration files with a name matching each game platform in its `~/.config/parker` directory:
+When the command is run, it looks in its config directory (`~/.config/parker/`) for JSON configuration files with a name matching a supported platform:
 
 - `~/.config/parker/platforms/steam.json`
 - `~/.config/parker/platforms/switch.json`
-- `~/.config/parker/platforms/playstation.json`
+- `~/.config/parker/platforms/ps4.json`
 
 All config files share the same format:
 
@@ -37,12 +37,14 @@ All config files share the same format:
 }
 ```
 
-Your config _must_ have a `source_path`, or Parker won't know where to look for screenshots, and that would be bad.
+Your config _must_ have a `source_path`, or Parker won't know where to look for screenshots, and that would be bad. They should look match something like:
+
+- Steam: `/path/to/userdata/(account id)/(install id)/remote/`
+- Switch: `/path/to/Nintendo/Album/`
+- PS4: `/path/to/PS4/SHARE/Screenshots/` 
 
 The optional `name` value will be used to name the parent directory housing each game (and so in the above example, if you were telling Parker to use `~/Pictures/Screenshots`, the above would copy games into `~/Pictures/Screenshots/My Steam Screenshots/Awesome Game`, etc. If left out, it defaults to a capitalised version of the platform name.
 
-The key/value in the `games` section is required for every platform _except_ the Playstation (due to the layout of the screenshots on disk coming off the console, we can pull the game name for you). You can determine the game ID for Steam and Switch games based on the ID in the screenshot path, or the ending hash of the filename, respectively. This is less than ideal, but hey, it works for now.
+The key/value in the `games` section is required for every platform _except_ the Playstation (due to the layout of the screenshots on disk coming off the console, we can pull the game name for you). You can determine the game ID for Steam and Switch games based on the ID in the screenshot path, or the ending hash of the filename, respectively. This is less than ideal, but hey, it works for now. It's possible that I could add a way to look these up, or keep a giant database of the mappings locally. Maybe?
 
-It's possible that eventually I'd either add a way to look these up or keep a giant database of the mappings locally. Maybe.
-
-And that's pretty much it. This is mostly for me, really, but I'd love to know if someone else finds it useful.
+And that's pretty much it! This is mostly for me, but I'd love to know if someone else finds it useful. Enjoy your games!
