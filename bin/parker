@@ -24,7 +24,6 @@ Usage:
 parker
 Options:
 EOS
-  opt :config, 'Config file path', type: :string, default: File.join(source_directory, 'config.json')
   opt :destination, 'Output directory for screenshots', type: :string, default: Dir.pwd
 end
 
@@ -36,7 +35,7 @@ end
 
 platforms = []
 
-Dir.glob(File.join(source_directory, '*.json')).each do |path|
+Dir.glob(File.join(source_directory, 'platforms', '*.json')).each do |path|
   platform_name = File.basename(path, File.extname(path)).capitalize
 
   if (platform_klass = Object.const_get("Parker::Platform::#{platform_name}"))
@@ -48,6 +47,11 @@ Dir.glob(File.join(source_directory, '*.json')).each do |path|
       platform_data['games'] || {}
     )
   end
+end
+
+if platforms.empty?
+  puts "Nothing to do (no platforms found)."
+  exit
 end
 
 output_path = File.expand_path(options[:destination])
