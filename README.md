@@ -43,7 +43,7 @@ Your config _must_ have a `source_path`, or Parker won't know where to look for 
 - Switch: `/path/to/Nintendo/Album/`
 - PS4: `/path/to/PS4/SHARE/Screenshots/` 
 
-The optional `name` value will be used to name the parent directory housing each game (and so in the above example, if you were telling Parker to use `~/Pictures/Screenshots`, the above would copy games into `~/Pictures/Screenshots/My Steam Screenshots/Awesome Game`, etc. If left out, it defaults to a capitalised version of the platform name.
+The optional `name` value will be used to name the parent directory housing each game (and so in the above example, if you were telling Parker to use `~/Pictures/Screenshots`, the above would copy games into `~/Pictures/Screenshots/My Steam Screenshots/Awesome Game`, etc. If left out, it picks a sensible default for you.
 
 The key/value in the `games` section is required for every platform _except_ the Playstation (due to the layout of the screenshots on disk coming off the console, we can pull the game name for you). You can determine the game ID for Steam and Switch games based on the ID in the screenshot path, or the ending hash of the filename, respectively. This is less than ideal, but hey, it works for now. It's possible that I could add a way to look these up, or keep a giant database of the mappings locally. Maybe?
 
