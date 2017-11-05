@@ -37,17 +37,24 @@ Trollop.educate if ARGV.empty?
 platforms = []
 
 Dir.glob(File.join(source_directory, 'platforms', '*.json')).each do |path|
-  platform_name = File.basename(path, File.extname(path)).capitalize
+  klass = case File.basename(path, File.extname(path)).to_sym
+          when :ps4
+            'PS4'
+          when :switch
+            'Switch'
+          when :steam
+            'Steam'
+          end
 
-  if (platform_klass = Object.const_get("Parker::Platform::#{platform_name}"))
-    platform_data = JSON.parse(File.read(path))
+  next if klass.nil?
 
-    platforms << platform_klass.new(
-      platform_data['name'] || platform_name,
-      platform_data['source_path'],
-      platform_data['games'] || {}
-    )
-  end
+  platform_config = JSON.parse(File.read(path))
+
+  platforms << Object.const_get("Parker::Platform::#{klass}").new(
+    platform_config['name'],
+    platform_config['source_path'],
+    platform_config['games']
+  )
 end
 
 if platforms.empty?
