@@ -2,6 +2,7 @@
 
 $LOAD_PATH.unshift(__dir__)
 
+require 'fileutils'
 require 'json'
 
 require 'parker/game'
