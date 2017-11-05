@@ -57,15 +57,23 @@ end
 output_path = File.expand_path(options[:destination])
 FileUtils.mkdir_p(output_path) unless Dir.exist?(output_path)
 
-puts "Copying screenshots to #{output_path}..."
+puts "Scanning..."
 
 platforms.each do |platform|
   platform.games.each_value do |game|
     if game.screenshots.length > 0
-      puts "- Scanning #{game.name} (#{platform.name})"
-      game.copy_screenshots(File.join(output_path, platform.name))
+      print "- #{game.name} (#{platform.name}): "
+
+      platform_path = File.join(output_path, platform.name)
+      copied_count = game.copy_screenshots(platform_path)
+
+      if copied_count > 0
+        puts "Copied #{copied_count} new screenshot#{'s' unless copied_count == 1}."
+      else
+        puts '✓'
+      end
     end
   end
 end
 
-puts "Done!"
+puts "\nDone!"
