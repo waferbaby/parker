@@ -2,7 +2,7 @@
 
 This is a very simple tool for organising your video game screenshots. I _love_ screenshots, and love to have them neatly sorted by platform and game, but I might just be weird.
 
-It currently supports 3 platforms: Steam, the Nintendo Switch, and the PS4. **Please note**: you'll still have to, y'know, actually copy them onto a disk somewhere yourself before running Parker. I wish this wasn't still a painful experience, but here we are.
+It currently supports 3 platforms: Steam, the Nintendo Switch, and the PS4. **Please note**: you're going to have to, y'know, actually copy them onto a disk somewhere yourself before running Parker. I wish this wasn't still a painful experience, but here we are.
 
 ## Installation
 
