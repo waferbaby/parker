@@ -1,8 +1,9 @@
 module Parker
   class Game
-    attr_accessor :name, :screenshots
+    attr_accessor :identifier, :name, :screenshots
 
-    def initialize(name)
+    def initialize(identifier, name)
+      @identifier = identifier
       @name = name
       @screenshots = []
     end
@@ -16,7 +17,7 @@ module Parker
 
         next if File.exist?(new_file_path)
 
-        FileUtils.mkdir(platform_path) unless Dir.exist?(platform_path)
+        FileUtils.mkdir_p(platform_path) unless Dir.exist?(platform_path)
         FileUtils.cp(screenshot.path, new_file_path)
 
         copied_screenshots += 1
