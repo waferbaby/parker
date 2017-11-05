@@ -2,7 +2,7 @@ require 'digest'
 
 module Parker
   module Platform
-    class Playstation < Base
+    class PS4 < Base
       def scan_games
         screenshots_path = File.join(source_path, '*', File::SEPARATOR, '*.jpg')
 
