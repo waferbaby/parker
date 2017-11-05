@@ -5,12 +5,14 @@ module Parker
       attr_accessor :games
 
       def initialize(name, source_path, game_data)
-        @name = name
+        @name = name || self.class.name.split('::').last
         @source_path = source_path
         @games = {}
 
-        game_data.map do |identifier, name|
-          @games[identifier] = Game.new(name)
+        unless game_data.nil?
+          game_data.map do |identifier, name|
+            @games[identifier] = Game.new(identifier, name)
+          end
         end
 
         scan_games
