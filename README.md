@@ -1,4 +1,4 @@
-### Parker
+# Parker
 
 This is a very simple tool for organising your video game screenshots. I _love_ my game screenshots, and like to have them neatly sorted by platform and game, but I might just be weird.
 
