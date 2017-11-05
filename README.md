@@ -37,7 +37,7 @@ All config files share the same format:
 }
 ```
 
-Your config _must_ have a `source_path`, or Parker won't know where to look for screenshots, and that would be bad. They should look match something like:
+Your config _must_ have a `source_path`, or Parker won't know where to look for screenshots, and that would be bad. They should look something like:
 
 - Steam: `/path/to/userdata/(account id)/(install id)/remote/`
 - Switch: `/path/to/Nintendo/Album/`
