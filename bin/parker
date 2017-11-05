@@ -21,10 +21,9 @@ options = Trollop.options do
 A ridiculous tool for organising game screenshots.
 
 Usage:
-parker
+parker [output directory]
 Options:
 EOS
-  opt :destination, 'Output directory for screenshots', type: :string, default: Dir.pwd
 end
 
 unless Dir.exist?(source_directory)
@@ -32,6 +31,8 @@ unless Dir.exist?(source_directory)
   puts "Created config directory: #{source_directory}"
   exit
 end
+
+Trollop.educate if ARGV.empty?
 
 platforms = []
 
@@ -54,7 +55,7 @@ if platforms.empty?
   exit
 end
 
-output_path = File.expand_path(options[:destination])
+output_path = File.expand_path(ARGV[0])
 FileUtils.mkdir_p(output_path) unless Dir.exist?(output_path)
 
 puts "Scanning..."
