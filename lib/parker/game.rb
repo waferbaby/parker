@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 module Parker
+  # A class that models a single game.
   class Game
     attr_accessor :identifier, :name, :screenshots
 

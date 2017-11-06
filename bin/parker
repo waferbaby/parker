@@ -15,15 +15,15 @@ end
 
 source_directory = File.expand_path(File.join('~/', '.config', 'parker'))
 
-options = Trollop.options do
+Trollop.options do
   version "parker v#{Parker::VERSION}"
-  banner <<-EOS
+  banner <<-BANNER
 A ridiculous tool for organising game screenshots.
 
 Usage:
 parker [output directory]
 Options:
-EOS
+BANNER
 end
 
 unless Dir.exist?(source_directory)
@@ -58,28 +58,28 @@ Dir.glob(File.join(source_directory, 'platforms', '*.json')).each do |path|
 end
 
 if platforms.empty?
-  puts "Nothing to do (no platforms found)."
+  puts 'Nothing to do (no platforms found).'
   exit
 end
 
 output_path = File.expand_path(ARGV[0])
 FileUtils.mkdir_p(output_path) unless Dir.exist?(output_path)
 
-puts "Scanning..."
+puts 'Scanning...'
 
 platforms.each do |platform|
   platform.games.each_value do |game|
-    if game.screenshots.length > 0
-      print "- #{game.name} (#{platform.name}): "
+    next unless game.screenshots.count.positive?
 
-      platform_path = File.join(output_path, platform.name)
-      copied_count = game.copy_screenshots(platform_path)
+    print "- #{game.name} (#{platform.name}): "
 
-      if copied_count > 0
-        puts "Copied #{copied_count} new screenshot#{'s' unless copied_count == 1}."
-      else
-        puts '✓'
-      end
+    platform_path = File.join(output_path, platform.name)
+    copied_count = game.copy_screenshots(platform_path)
+
+    if copied_count.positive?
+      puts "Copied #{copied_count} new screenshot#{'s' if copied_count != 1}."
+    else
+      puts '✓'
     end
   end
 end
