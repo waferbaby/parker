@@ -15,7 +15,7 @@ module Parker
           game_name = File.basename(path, File.extname(path)).split('_')[0]
           game_id = Digest::SHA1.hexdigest(game_name)[0..9]
 
-          games[game_id] ||= Game.new(game_name.sub('™', '').sub('_', ' -'))
+          games[game_id] ||= Game.new(game_id, game_name.sub('™', '').sub('_', ' -'))
           games[game_id].screenshots << Screenshot.new(path)
         end
       end
