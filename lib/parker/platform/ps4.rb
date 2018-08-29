@@ -12,7 +12,7 @@ module Parker
         Dir.glob(screenshots_path).each do |path|
           next if path.match?(/\_\d.jpg$/)
 
-          game_name = File.basename(path, File.extname(path)).split('_')[0]
+          game_name = File.dirname(path).split(File::SEPARATOR)[-1]
           game_id = Digest::SHA1.hexdigest(game_name)[0..9]
 
           games[game_id] ||= Game.new(game_id, game_name.sub('™', '').sub('_', ' -'))
