@@ -9,7 +9,7 @@ module Parker
 
       def initialize(name, source_path, game_data)
         @name = name || self.class.name.split('::').last
-        @source_path = source_path
+        @source_path = File.expand_path(source_path)
         @games = {}
 
         game_data&.map do |game_identifier, game_name|
