@@ -1,13 +1,13 @@
 PATH
   remote: .
   specs:
-    parker (0.0.1)
-      trollop (~> 2.1)
+    parker (0.2.2)
+      optimist (~> 3.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    trollop (2.1.2)
+    optimist (3.0.0)
 
 PLATFORMS
   ruby
@@ -16,7 +16,7 @@ DEPENDENCIES
   parker!
 
 RUBY VERSION
-   ruby 2.4.2p198
+   ruby 2.4.3p205
 
 BUNDLED WITH
-   1.15.4
+   1.16.6

@@ -6,7 +6,7 @@ $LOAD_PATH.unshift(File.join(__dir__, '..', 'lib'))
 require 'parker'
 require 'parker/version'
 require 'json'
-require 'trollop'
+require 'optimist'
 
 trap('SIGINT') do
   puts 'Cancelled!'
@@ -15,7 +15,7 @@ end
 
 source_directory = File.expand_path(File.join('~/', '.config', 'parker'))
 
-Trollop.options do
+Optimist.options do
   version "parker v#{Parker::VERSION}"
   banner <<-BANNER
 A ridiculous tool for organising game screenshots.
@@ -32,7 +32,7 @@ unless Dir.exist?(source_directory)
   exit
 end
 
-Trollop.educate if ARGV.empty?
+Optimist.educate if ARGV.empty?
 
 platforms = []
 
