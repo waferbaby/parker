@@ -71,16 +71,13 @@ platforms.each do |platform|
   platform.games.each_value do |game|
     next unless game.screenshots.count.positive?
 
-    print "- #{game.name} (#{platform.name}): "
-
     platform_path = File.join(output_path, platform.name)
-    copied_count = game.copy_screenshots(platform_path)
+    copied = game.copy_screenshots(platform_path)
 
-    if copied_count.positive?
-      puts "Copied #{copied_count} new screenshot#{'s' if copied_count != 1}."
-    else
-      puts '✓'
-    end
+    next unless copied.positive?
+
+    print "- #{game.name} (#{platform.name}): "
+    puts "Copied #{copied} new screenshot#{'s' if copied != 1}."
   end
 end
 
